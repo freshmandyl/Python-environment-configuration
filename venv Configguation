@@ -1,0 +1,5 @@
+Win+R->cmd->enter
+Change directory：cd /d A:\MultiReactorMultiTurbine\ReinforceLearning\RL-MPC-main
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
