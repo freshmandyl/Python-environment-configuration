@@ -1,0 +1,30 @@
+安装L4CAsADi(Learning 4 CasADi Framework)  github home page: https://github.com/Tim-Salzmann/l4casadi
+
+pip install (CPU version):
+pip install torch>=2.0 --index-url https://download.pytorch.org/whl/cpu
+ensure:setuptools>=68.1 scikit-build>=0.17 cmake>=3.27 ninja>=1.11
+pip install l4casadi --no-build-isolation
+
+from source (CPU version):
+clone the repository(需指定clone路径 cd \d PATH): git clone https://github.com/Tim-Salzmann/l4casadi.git
+All build dependencies installed via: pip install -r requirements_build.txt
+Build from source: pip install . --no-build-isolation
+(The --no-build-isolation flag is required for L4CasADi to find and link against the installed PyTorch.)
+
+还未尝试CUDA加速：
+GPU(CUDA)
+CUDA installation requires nvcc to be installed which is part of the CUDA toolkit,安装CUDA的完整步骤：
+1,  cmd-> nvidia-smi, 记录CUDA Version:12.3
+2,  访问CUDA Toolkit Archive(https://developer.nvidia.com/cuda-toolkit-archive)选择与PyTorch版本兼容的CUDA版本
+3,  安装CUDA Toolkit
+4,  配置环境变量,检查系统环境变量PATH中是否包含：C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.3\bin C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.3\libnvvp 
+5,  验证安装：cmd-> nvcc -V
+6,  CUDA安装完成后还需安装匹配CUDA版本的PyTorch：pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121
+7,  验证PyTorch是否使用GPU：
+import torch
+print(torch.__version__)
+print(torch.cuda.is_available())  # 应为 True
+print(torch.cuda.get_device_name(0))
+8,  make sure "nvcc -V" can be executed and run 
+pip install l4casadi --no-build-isolation     Or
+CUDACXX=<PATH_TO_NVCC> pip install . --no-build-isolation   
